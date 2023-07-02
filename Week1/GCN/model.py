@@ -2,6 +2,7 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch.sparse as tss
 
 class GraphConv(nn.Module) :
 
@@ -21,8 +22,8 @@ class GraphConv(nn.Module) :
         
     def forward(self, input, adj_graph) :
         
-        output = torch.einsum("ij, jk -> ik", input, self.weight)
-        output = torch.spmm(adj_graph, output) + self.bias
+        output = tss.mm(input, self.weight)
+        output = tss.mm(adj_graph, output) + self.bias
         
         return output 
         
