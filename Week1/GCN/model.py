@@ -15,7 +15,6 @@ class GraphConv(nn.Module) :
         self.weight = nn.Parameter(torch.FloatTensor(in_, out_))
         self.bias = nn.Parameter(torch.FloatTensor(out_))
         
-        # Initial Weights
         std = 1.0 / math.sqrt(self.weight.size(1))
         self.weight.data.uniform_(-std, std)
         self.bias.data.uniform_(-std, std)
