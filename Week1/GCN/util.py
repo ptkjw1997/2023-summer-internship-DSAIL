@@ -64,7 +64,7 @@ def load_data(data_name, data_balance) :
     # Normalize Graph
     adj_graph = tgu.to_torch_coo_tensor(graph['edge_index'])
 
-    adj_graph_loop = tgu.add_self_loops(adj_graph)[0]
+    adj_graph_loop = tgu.add_self_loops(adj_graph)[0] # Add Self-Loop
     D = tss.sum(adj_graph_loop, dim = 1)
     indices_diag = torch.stack([D.indices(), D.indices()]).reshape(2, -1)
     D_inv = torch.sparse_coo_tensor(indices = indices_diag,
